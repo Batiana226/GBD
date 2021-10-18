@@ -1,0 +1,537 @@
+     1	-------------------------- ajouternouveau.php -------------------------------------------------
+     2	??
+     3	??
+     4	??
+       
+     5	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+     6	<html>
+     7	<head>
+     8	  <title>Page permettant d'ajouter un nouveau type de materiel dans la base</title>
+     9	  <link rel="stylesheet" href="style4.css">
+    10	  <meta charset="UTF-8"> 
+    11	</head>
+       
+    12	<body>
+       
+    13	<!-- Contenu principal -->
+    14	<h1>Page d'ajout d'un nouveau type de materiel 1/4</h1>
+       
+    15	<?php
+    16	        // Cette fonction, fondamentale, prend en entrée la requête et renvoie
+    17	        // un array resultat composé de 2 éléments, le nombre d'enregistrements trouvé resultat[0]
+    18	        // et la liste des enregistrements resultat[1]
+    19	        // resultat[1][y] permet d'accéder au y ème enregistrement
+    20	        // resultat{1][y][x] permet d'accéder à la valeur de la colonne x pour l'enregistrement y
+    21	        function query_database($q)
+    22	        {
+    23	                ??
+       
+    24	                if ($conn->connect_error) die($conn->connect_error);
+       
+    25	                $query  = $q;
+    26	                $result = $conn->query($query);
+    27	                if (!$result)
+    28	                        die ("Database access failed: " . $conn->error);
+       
+    29	                $rows = $result->num_rows;
+       
+    30	                $table_1 = array();
+       
+    31	                for ($j = 0 ; $j < $rows ; ++$j)
+    32	                {
+    33	                        $result->data_seek($j);
+    34	                        $row = $result->fetch_row();
+       
+    35	                        array_push($table_1,$row);
+    36	                }
+       
+    37	                $result->close();
+    38	                $conn->close();
+       
+    39			// array(0) contient le nombre d'enregistrements
+    40			// array(1) contient tous les enregistrements
+    41	                return array($rows, $table_1);
+    42	        }
+       
+    43		// Fonction permettant de nettoyer les données reçues depuis le formulaire.
+    44		// En théorie, il faudrait l'appeler pour chaque champ text du formulaire
+    45		// pour éviter l'injection maligne de commandes php fraduleuses.
+    46	 
+    47		function test_input($data)
+    48		{
+    49			$data = trim($data);
+    50			$data = stripslashes($data);
+    51			$data = htmlspecialchars($data);
+    52			return $data;
+    53		}
+       
+    54		// Quand on charge la page, on commence par dire qu'il n'y a pas d'erreurs
+    55		// dedans
+       
+    56		??
+       
+    57		// Si le formulaire est bien rempli avec la méthode POST
+       
+    58		if ($_SERVER["REQUEST_METHOD"] == "POST")
+    59		{
+       
+    60			// On commence par regarder si le champ text nomMateriel est vide. Si oui,
+    61			// c'est une erreur
+       
+    62			??
+       
+    63			// Sinon, on regarde si le nom nomMateriel est déjà dans la
+    64			// base, dans la table matériel
+       
+    65			else
+    66			{
+       
+    67				??
+    68			}
+       
+    69			// Si on n'a pas eu d'erreur, cela veut dire que le champ nomMateriel est bien rempli
+    70			// et qu'il ne correspond pas à un nom de matériel déjà existant.
+    71			// Tout va donc bien, on va pouvoir maintenant aller à la page suivante, qui permet
+    72			// de choisir le nom et le type des différentes colonnes.
+    73			// On met nomMateriel dans le dico $_SESSION pour pouvoir le passer à la page suivante en paramètre
+       
+    74	                if ($errors==0)
+    75	                {
+    76				??
+    77	                }
+    78		}
+       
+       
+    79	?>
+       
+    80	<p><span class="error">* champs requis.</span></p>
+    81	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+       
+    82		??
+       
+    83	        <br><br>
+    84	        <input type="submit" name="submit" value="Valider">
+    85	</form>
+    86	  
+    87	</body>
+    88	</html>
+       
+    89	-------------------------- ajouternouveau2.php -------------------------------------------------
+       
+    90	??
+    91	??
+    92	??
+       
+    93	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+    94	<html>
+    95	<head>
+    96	  <title>Page permettant d'ajouter un nouveau type de materiel dans la base</title>
+    97	  <link rel="stylesheet" href="style4.css">
+    98	  <meta charset="UTF-8"> 
+    99	</head>
+       
+   100	<body>
+       
+   101	<!-- Contenu principal -->
+   102	<h1>Page d'ajout d'un nouveau type de materiel 2/3</h1>
+       
+   103	<?php
+   104	        // Cette fonction, fondamentale, prend en entrée la requête et renvoie
+   105	        // un array resultat composé de 2 éléments, le nombre d'enregistrements trouvé resultat[0]
+   106	        // et la liste des enregistrements resultat[1]
+   107	        // resultat[1][y] permet d'accéder au y ème enregistrement
+   108	        // resultat{1][y][x] permet d'accéder à la valeur de la colonne x pour l'enregistrement y
+   109	        function query_database($q)
+   110	        {
+       
+   111			??
+       
+   112	                if ($conn->connect_error) die($conn->connect_error);
+       
+   113	                $query  = $q;
+   114	                $result = $conn->query($query);
+   115	                if (!$result)
+   116	                        die ("Database access failed: " . $conn->error);
+       
+   117	                $rows = $result->num_rows;
+       
+   118	                $table_1 = array();
+       
+   119	                for ($j = 0 ; $j < $rows ; ++$j)
+   120	                {
+   121	                        $result->data_seek($j);
+   122	                        $row = $result->fetch_row();
+       
+   123	                        array_push($table_1,$row);
+   124	                }
+       
+   125	                $result->close();
+   126	                $conn->close();
+       
+   127			// array(0) contient le nombre d'enregistrements
+   128			// array(1) contient tous les enregistrements
+   129	                return array($rows, $table_1);
+   130	        }
+       
+   131		$nomMateriel=$_SESSION['nomMateriel'];
+   132		echo "ici<br>";
+   133		echo $nomMateriel;
+       
+       
+   134	?>
+   135		<p> La base de données s'apprête à créer une table <?php echo "<b>tm_".$nomMateriel."</b>."; ?> </p>
+   136		<p> Cliquer sur "Ajouter une nouvelle colonne à la table" pour modifier la structure de <?php echo "<b>tm_".$nomMateriel."</b>."; ?> </p>
+   137		<p> Cliquer sur "Valider la structure de la table" pour passer à l'étape suivante. </p>
+   138	 
+   139	                <form method="POST" action="ajouternouveau3.php">
+   140	                        <div id="dynamicInput">
+   141	                        </div>
+       
+   142	                        <input type="button" value="Ajouter une nouvelle colonne à la table" onClick="addInput('dynamicInput');">
+       
+   143	                        <input type="submit" name="submit" value="Valider la structure de la table">
+       
+   144	                </form>
+       
+   145	                <script src="ajouternouveau.js"></script>
+   146	</body>
+   147	</html>
+       
+   148	-------------------------- ajouternouveau.js -------------------------------------------------
+       
+   149	var id = 0;
+   150	var compteur = 0;
+   151	var limite = 5;
+   152	var dico = {}; 
+       
+   153	function addInput(divName){
+   154	         if (compteur == limite)  {
+   155	              alert("Vous avez atteint la limite " + compteur + " des champs");
+   156	         }
+   157	         else {
+   158	              var newdiv = document.createElement('div');
+   159	              //newdiv.innerHTML = "Champ " + (compteur+1) + " <br><input type='text' name='myColumns[]'>";
+   160	              newdiv.innerHTML = "Nouvelle colonne  <br><input type='text' name='myColumns[]'>";
+   161			sel="<select name=\"myFields[]\" id=\"myFields\">";
+   162			sel+="<option value=\"INT\">int</option>";
+   163			sel+="<option value=\"VARCHAR(100)\">varchar</option>";
+   164			sel+="<option value=\"FLOAT\">float</option>";
+   165			sel+="</select>";
+       
+   166			//but="<button type='button' onClick='buttonClick('"+str(compteur)+")'>Supprimer le champ</button>";
+   167			but="<button type='button' onClick='buttonClick("+(id)+")'>Supprimer le champ</button>";
+       
+   168	              newdiv.innerHTML +=sel+but;
+   169	              document.getElementById(divName).appendChild(newdiv);
+   170			dico[id]=newdiv;
+   171			console.log(Object.keys(dico).length);
+   172	              compteur+=1;
+   173			id++;
+   174	         }
+   175	}
+       
+   176	function buttonClick(s) {
+   177		var is=parseInt(s);
+   178		document.getElementById('dynamicInput').removeChild(dico[is]);
+   179		delete dico[is];
+       
+   180		compteur=Object.keys(dico).length;
+   181		console.log(compteur);
+   182	}
+       
+   183	-------------------------- ajouternouveau3.php -------------------------------------------------
+       
+   184	??
+   185	??
+   186	??
+       
+   187	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+   188	<html>
+   189	<head>
+   190	  <title>Page permettant d'ajouter un nouveau type de materiel dans la base</title>
+   191	  <link rel="stylesheet" href="style4.css">
+   192	  <meta charset="UTF-8"> 
+   193	</head>
+       
+   194	<body>
+       
+   195	<!-- Contenu principal -->
+   196	<h1>Page permettant d'ajouter un nouveau type de materiel dans la base 3/4</h1>
+       
+   197	<?php
+   198	        // Cette fonction, fondamentale, prend en entrée la requête et renvoie
+   199	        // un array resultat composé de 2 éléments, le nombre d'enregistrements trouvé resultat[0]
+   200	        // et la liste des enregistrements resultat[1]
+   201	        // resultat[1][x] permet d'accéder au x ème enregistrement
+   202	        // resultat{1][x][y] permet d'accéder à la valeur de la colonne y pour l'enregistrement x
+   203	        function query_database($q)
+   204	        {
+   205			??
+       
+   206	                if ($conn->connect_error) die($conn->connect_error);
+       
+   207	                $query  = $q;
+   208	                $result = $conn->query($query);
+   209	                if (!$result)
+   210	                        die ("Database access failed: " . $conn->error);
+       
+   211	                $rows = $result->num_rows;
+       
+   212	                $table_1 = array();
+       
+   213	                for ($j = 0 ; $j < $rows ; ++$j)
+   214	                {
+   215	                        $result->data_seek($j);
+   216	                        $row = $result->fetch_row();
+       
+   217	                        array_push($table_1,$row);
+   218	                }
+       
+   219	                $result->close();
+   220	                $conn->close();
+       
+   221	                return array($rows, $table_1);
+   222	        }
+       
+   223		$nomMateriel=$_SESSION['nomMateriel'];
+   224		echo $nomMateriel."<br>";
+   225		$tmMateriel="tm_".$nomMateriel;
+       
+   226		$rows=0;
+   227		if($_SERVER["REQUEST_METHOD"] == "POST")
+   228	 	{
+   229	    		$myColumns = $_POST["myColumns"];
+   230	    		$myFields = $_POST["myFields"];
+       
+   231			$i=0;
+   232			while ($i<sizeof($myColumns))
+   233			{
+   234				echo $i." ".$myColumns[$i]." ".$myFields[$i]."<br>";
+   235				$i++;
+   236			}
+   237	 	}  
+       
+   238		$query="";
+       
+   239		??
+       
+   240		$_SESSION['query']=$query;
+   241	?>
+       
+   242	<p> La requête SQL de création de la table a été construite. </p>
+       
+   243	<form method="post" action="ajouternouveau4.php">
+   244	        <input type="submit" name="submit" value="Créer la table">
+   245	</form>
+       
+   246	</body>
+   247	</html>
+       
+   248	-------------------------- ajouternouveau4.php -------------------------------------------------
+       
+   249	??
+   250	??
+   251	??
+       
+   252	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+   253	<html>
+   254	<head>
+   255	  <title>Page permettant d'ajouter un nouveau type de materiel dans la base</title>
+   256	  <link rel="stylesheet" href="style4.css">
+   257	  <meta charset="UTF-8"> 
+   258	</head>
+       
+   259	<body>
+       
+   260	<!-- Contenu principal -->
+   261	<h1>Page permettant d'ajouter un nouveau type de materiel dans la base 4/4</h1>
+       
+   262	<?php
+   263	        // Cette fonction, fondamentale, prend en entrée la requête et renvoie
+   264	        // un array resultat composé de 2 éléments, le nombre d'enregistrements trouvé resultat[0]
+   265	        // et la liste des enregistrements resultat[1]
+   266	        // resultat[1][x] permet d'accéder au x ème enregistrement
+   267	        // resultat{1][x][y] permet d'accéder à la valeur de la colonne y pour l'enregistrement x
+   268	        function query_database($q)
+   269	        {
+       
+   270			??
+       
+   271	                if ($conn->connect_error) die($conn->connect_error);
+       
+   272	                $query  = $q;
+   273	                $result = $conn->query($query);
+   274	                if (!$result)
+   275	                        die ("Database access failed: " . $conn->error);
+       
+   276	                $rows = $result->num_rows;
+       
+   277	                $table_1 = array();
+       
+   278	                for ($j = 0 ; $j < $rows ; ++$j)
+   279	                {
+   280	                        $result->data_seek($j);
+   281	                        $row = $result->fetch_row();
+       
+   282	                        array_push($table_1,$row);
+   283	                }
+       
+   284	                $result->close();
+   285	                $conn->close();
+       
+   286	                return array($rows, $table_1);
+   287	        }
+       
+   288		??
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+   289		??
+   290	?>
+       
+   291	<p> La table du nouveau matériel a été créée. </p>
+       
+   292	</body>
+   293	</html>
+       
+   294	-------------------------- mysql1.c -------------------------------------------------
+       
+   295	#include <my_global.h>
+   296	#include <mysql.h>
+       
+   297	int cptNoeuds;
+   298	int cptAretes;
+   299	struct {
+   300		char nom[45];
+   301		int emprunte;
+   302	} noeuds[100];
+       
+   303	int aretes[100][3];
+       
+   304	void finish_with_error(MYSQL *con)
+   305	{
+   306	  fprintf(stderr, "%s\n", mysql_error(con));
+   307	  mysql_close(con);
+   308	  exit(1);
+   309	}
+       
+   310	int main(int argc, char **argv)
+   311	{
+   312	  MYSQL *con = mysql_init(NULL);
+       
+   313	  if (con == NULL)
+   314	  {
+   315	      fprintf(stderr, "mysql_init() failed\n");
+   316	      exit(1);
+   317	  }
+       
+   318	  if (mysql_real_connect(con, "localhost", "root", "peri2019", "matos4", 0, NULL, 0) == NULL)
+   319	  {
+   320	      finish_with_error(con);
+   321	  }
+       
+   322	  if (mysql_query(con, "SELECT * FROM instance_materiel"))
+   323	  {
+   324	      finish_with_error(con);
+   325	  }
+       
+   326	  MYSQL_RES *result = mysql_store_result(con);
+       
+   327	  if (result == NULL)
+   328	  {
+   329	      finish_with_error(con);
+   330	  }
+       
+   331	  int num_fields = mysql_num_fields(result);
+       
+       
+   332	  MYSQL_ROW row;
+       
+       
+   333	  ??
+       
+       
+       
+       
+       
+       
+       
+       
+       
+   334	  ??
+       
+   335	  mysql_free_result(result);
+   336	  mysql_close(con);
+       
+   337	  exit(0);
+   338	}
+       
+   339	-------------------------- example_simple.c -------------------------------------------------
+       
+   340	#include <stdio.h>
+   341	#include "smtp.h"
+   342	#define MAIL_SERVER              "mail.gmx.com"
+   343	#define MAIL_PORT                "587"
+   344	#define MAIL_CONNECTION_SECURITY SMTP_SECURITY_STARTTLS
+   345	#define MAIL_FLAGS               (SMTP_DEBUG         | \
+   346	                                  SMTP_NO_CERT_VERIFY) /* Do not verify cert. */
+   347	#define MAIL_CAFILE              NULL
+   348	#define MAIL_AUTH                SMTP_AUTH_PLAIN
+   349	#define MAIL_USER                "tpgbd_ei2i4_2020@gmx.fr"
+   350	#define MAIL_PASS                "TPGBD_EI2I4"
+   351	#define MAIL_FROM                "tpgbd_ei2i4_2020@gmx.fr"
+   352	#define MAIL_FROM_NAME           "Grand sensei"
+   353	#define MAIL_SUBJECT             "URGENT ! RETARD !"
+   354	#define MAIL_BODY                "Email Body"
+   355	#define MAIL_TO                  "tpgbd_ei2i4_2020_etu1@gmx.fr"
+   356	#define MAIL_TO_NAME             "To Name"
+       
+   357	int main(void)
+   358	{
+   359	  struct smtp *smtp;
+   360	  int rc;
+   361	  rc = smtp_open(MAIL_SERVER,
+   362	                 MAIL_PORT,
+   363	                 MAIL_CONNECTION_SECURITY,
+   364	                 MAIL_FLAGS,
+   365	                 MAIL_CAFILE,
+   366	                 &smtp);
+   367	  rc = smtp_auth(smtp,
+   368	                 MAIL_AUTH,
+   369	                 MAIL_USER,
+   370	                 MAIL_PASS);
+   371	  rc = smtp_address_add(smtp,
+   372	                        SMTP_ADDRESS_FROM,
+   373	                        MAIL_FROM,
+   374	                        MAIL_FROM_NAME);
+   375	  rc = smtp_address_add(smtp,
+   376	                        SMTP_ADDRESS_TO,
+   377	                        MAIL_TO,
+   378	                        MAIL_TO_NAME);
+   379	  rc = smtp_header_add(smtp,
+   380	                       "Subject",
+   381	                       MAIL_SUBJECT);
+   382	  rc = smtp_attachment_add_mem(smtp,
+   383	                               "test.txt",
+   384	                               "Test email attachment.",
+   385	                               -1);
+   386	  rc = smtp_mail(smtp,
+   387	                 MAIL_BODY);
+   388	  rc = smtp_close(smtp);
+   389	  if(rc != SMTP_STATUS_OK){
+   390	    fprintf(stderr, "smtp failed: %s\n", smtp_status_code_errstr(rc));
+   391	    return 1;
+   392	  }
+   393	  return 0;
+   394	}
