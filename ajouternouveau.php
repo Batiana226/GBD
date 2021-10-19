@@ -126,7 +126,7 @@
 
     <!-- permet d'obliger l'utilisateur à entrer le nom du matériel -->
 
-    <span class = "errors" > * <?php echo $nomMateriel;?> </span> 
+    <span class = "errors" > * <?php echo $nomMaterielErr;?> </span> 
         <br><br>
         <input type="submit" name="submit" value="Valider">
 </form>
