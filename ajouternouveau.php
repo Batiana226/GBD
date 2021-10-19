@@ -100,7 +100,6 @@
             {
                 $nomMaterielErr = "Le nom exist déja";
                 ++$errors;
-
             }
 		}
 
@@ -112,7 +111,8 @@
 
                 if ($errors==0)
                 {
-			??
+			      header ("location: ajouternouveau2.php");
+                  $_SESSION['nomMateriel'] = $nomMateriel;
                 }
 	}
 
