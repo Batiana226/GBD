@@ -91,7 +91,17 @@
 		else
 		{
 
-			??
+			$nomMateriel = $_POST['nomMateriel'];
+            $query = "SELECT * FROM materiel WHERE nom = '".$nomMateriel."'";
+            echo $query; 
+            $result = query_database($query);
+
+            if($result[0] > 0)
+            {
+                $nomMaterielErr = "Le nom exist déja";
+                ++$errors;
+
+            }
 		}
 
 		// Si on n'a pas eu d'erreur, cela veut dire que le champ nomMateriel est bien rempli
