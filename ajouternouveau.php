@@ -68,7 +68,9 @@
 	// Quand on charge la page, on commence par dire qu'il n'y a pas d'erreurs
 	// dedans
 
-	??
+	$errors = 0;
+    $nomMateriel = "";
+    $nomMaterielerr = "";
 
 	// Si le formulaire est bien rempli avec la méthode POST
 
