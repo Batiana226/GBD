@@ -122,8 +122,11 @@
 <p><span class="error">* champs requis.</span></p>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-	??
+	NomduMateriel : "<input type = "text" name = "nomMateriel" value = "<? php echo $nomMateriel ;?>"
 
+    <!-- permet d'obliger l'utilisateur à entrer le nom du matériel -->
+
+    <span class = "errors" > * <?php echo $nomMateriel;?> </span> 
         <br><br>
         <input type="submit" name="submit" value="Valider">
 </form>
