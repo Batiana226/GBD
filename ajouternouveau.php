@@ -70,7 +70,7 @@
 
 	$errors = 0;
     $nomMateriel = "";
-    $nomMaterielerr = "";
+    $nomMaterielErr = "";
 
 	// Si le formulaire est bien rempli avec la méthode POST
 
@@ -80,8 +80,11 @@
 		// On commence par regarder si le champ text nomMateriel est vide. Si oui,
 		// c'est une erreur
 
-		??
-
+		if (empty($_POST["nomMateriel"]))
+         {
+             $nomMaterielErr = "Le nom du matériel doit être rempli";
+             ++$errors;
+         }
 		// Sinon, on regarde si le nom nomMateriel est déjà dans la
 		// base, dans la table matériel
 
